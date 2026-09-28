@@ -1,0 +1,14 @@
+import { demoRows } from "@/core/demo-data";
+
+export default function Home() {
+  return <div className="shell">
+    <aside className="sidebar"><div className="brand"><span className="brandmark">✦</span> SPECTRA</div><p className="eyebrow">INTELLIGENCE TERMINAL</p><nav aria-label="Main navigation"><a className="active" href="#market">◈ &nbsp; Market intelligence</a><a href="#forge">◇ &nbsp; Strategy Forge</a><a href="#flow">◎ &nbsp; Flow Radar</a></nav><div className="sidebarFoot">BSC · RESEARCH PREVIEW<br/>No wallet or live trading connected</div></aside>
+    <main><header><div><p className="eyebrow">SPECTRA / OVERVIEW</p><h1>Markets, with context.</h1><p className="sub">A clearer view of tokenized equities on BNB Smart Chain.</p></div><span className="mode">● DEMO DATA</span></header>
+      <section className="notice"><strong>Research preview</strong><span>Illustrative prices only. No live feed, wallet connection, or execution. Market status and timestamps are simulated.</span></section>
+      <section id="market"><div className="sectionHeading"><div><p className="eyebrow">01 / DISCOVER</p><h2>Market intelligence</h2></div><span className="muted">Per-share normalized · illustrative</span></div><div className="stats"><div><span>Assets tracked</span><strong>04</strong></div><div><span>Platforms</span><strong>01</strong></div><div><span>Independent feed</span><strong>Demo</strong></div><div><span>Execution</span><strong>Off</strong></div></div>
+      <div className="tableWrap"><table><thead><tr><th>Asset</th><th>Platform</th><th>Per-share price</th><th>TradFi anchor</th><th>Difference</th><th>Market</th></tr></thead><tbody>{demoRows.map(row => <tr key={row.ticker}><td><span className="ticker">{row.ticker}</span><small>{row.name} · {row.token}</small></td><td>{row.platform}</td><td className="mono price">${row.perShare}</td><td className="mono">${row.tradfi}</td><td className={`mono ${row.alert ? "alert" : ""}`}>{row.basis} bps</td><td><span className={row.status === "OPEN" ? "status open" : "status"}>{row.status}</span></td></tr>)}</tbody></table></div><p className="footnote">The token quote is divided by its current token-to-share ratio. Differences compare the normalized value with an independent TradFi anchor; the API reference price is not treated as an independent source.</p></section>
+      <section className="cards"><article id="flow"><p className="eyebrow">02 / READ</p><h2>Flow Radar</h2><p>Wallet accumulation and cross-platform flows will appear here after indexed transfer data is integrated and verified.</p><span className="badge">PLANNED</span></article><article id="forge"><p className="eyebrow">03 / FORGE</p><h2>Strategy Forge</h2><p>Build and simulate rules in a sandbox. Live execution requires policy controls and explicit mainnet verification.</p><span className="badge">PLANNED</span></article></section>
+      <footer>SPECTRA · Data provenance before execution</footer>
+    </main>
+  </div>;
+}
