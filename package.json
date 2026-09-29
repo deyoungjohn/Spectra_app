@@ -27,6 +27,7 @@
     "eslint": "9.36.0",
     "eslint-config-next": "15.5.26",
     "tsx": "4.20.5",
-    "typescript": "5.9.2"
+    "typescript": "5.9.2",
+    "tailwindcss": "4.1.13"
   }
 }
