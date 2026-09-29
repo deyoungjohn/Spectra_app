@@ -1,10 +1,16 @@
 import { AnimatedStatus } from "@/components/spectrum/animated-status";
 import { MarketDashboard } from "@/components/market-dashboard";
+import { FlowRadar } from "@/components/flow-radar";
+import { StrategyForge } from "@/components/strategy-forge";
+import { getFlowDataset } from "@/core/flow-data";
 import { getMarketDataset } from "@/core/market-data";
+import { getStrategy, getStrategyCatalog, replayStrategy } from "@/core/strategy-data";
 
 export const dynamic = "force-dynamic";
 export default async function Home() {
-  const dataset = await getMarketDataset();
+  const [dataset, flowDataset] = await Promise.all([getMarketDataset(), getFlowDataset()]);
+  const strategies = getStrategyCatalog().map(({ id }) => getStrategy(id)).filter((strategy) => strategy !== null);
+  const initialResult = replayStrategy(strategies[0].id);
   const modeTone = dataset.state === "fresh" ? "success" : dataset.state === "error" || dataset.state === "stale" ? "warning" : "neutral";
   return <div className="shell">
     <aside className="sidebar"><div className="brand"><span className="brandmark">✦</span> SPECTRA</div><p className="eyebrow">INTELLIGENCE TERMINAL</p><nav aria-label="Main navigation"><a className="active" href="#market">Market intelligence</a><a href="#flow">Flow Radar</a><a href="#forge">Strategy Forge</a></nav><div className="sidebarFoot">BSC · READ-ONLY RESEARCH<br/>No wallet or trading connected</div></aside>
@@ -15,7 +21,8 @@ export default async function Home() {
         <MarketDashboard dataset={dataset} />
         <p className="footnote">Token quotes are divided by the ratio observed with that quote. Spread compares the normalized price only with an independent TradFi source. API reference prices are never treated as independent evidence.</p>
       </section>
-      <section className="cards"><article id="flow"><p className="eyebrow">02 / READ</p><h2>Flow Radar</h2><p>Wallet accumulation will appear after indexed transfers are integrated and reconciled.</p><span className="badge">PLANNED</span></article><article id="forge"><p className="eyebrow">03 / FORGE</p><h2>Strategy Forge</h2><p>Deterministic strategy simulation follows provenance work. Mainnet execution remains gated.</p><span className="badge">PLANNED</span></article></section>
+      <FlowRadar dataset={flowDataset} />
+      <StrategyForge strategies={strategies} initialResult={initialResult} />
       <footer>SPECTRA · Data provenance before execution</footer>
     </main>
   </div>;
