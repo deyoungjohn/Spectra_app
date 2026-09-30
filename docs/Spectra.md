@@ -1497,7 +1497,7 @@ contract ExecutionPlanVerifier is EIP712 {
 
 | Env | Domain | Purpose | Features Enabled |
 |-----|--------|---------|------------------|
-| Local | `localhost:3000` | Dev & Test | All, `yfinance` fallback |
+| Local | `localhost:3001` | Dev & Test | All, `yfinance` fallback |
 | Vercel | `alpha-deck.vercel.app` | Hackathon Demo | All, Mock b402 |
 | Prod | `app.Spectra.finance` | Post-hackathon | All, Official b402 |
 

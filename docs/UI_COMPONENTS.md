@@ -1,12 +1,12 @@
 # UI component provenance
 
-Component source is vendored so the interface does not depend on a third-party runtime or CDN.
+Interactive primitives are installed from npm and composed locally so the interface does not depend on a runtime CDN.
 
-> Environment note: the official sites and npm registry returned HTTP 401/403 through the available proxy. The URLs below are the requested official sources, but their current catalog and license text could not be independently retrieved in this environment. Confirm both before merging.
+> Environment note: the official beUI and Spectrum UI sites still return HTTP 403 through the available proxy. The overhaul therefore uses the installed Base UI React package directly for interactive behavior rather than copying unverified source from inaccessible registries.
 
 | Library | Official source requested | Candidate | Expected dependencies | License status | Decision |
 | --- | --- | --- | --- | --- | --- |
-| beUI | https://beui.dev | Animated text treatments | Varies by component; animation options may add Motion | Requires confirmation | Not installed: additional motion was unnecessary for a dense financial table. |
-| Spectrum UI | https://spectrumui.dev | Animated status treatment | React and CSS | Requires confirmation | A small local implementation is installed at `src/components/spectrum/animated-status.tsx`; replace it from the official registry after access is restored. |
+| Base UI | https://base-ui.com | Button, Input, Select | `@base-ui/react` | MIT | Installed directly. Strategy controls use Base UI Button through the generated `ui/button` wrapper; market filters use Base UI Input and Select primitives. |
+| Spectrum UI | https://spectrumui.dev | Animated status treatment | React and CSS | Requires confirmation | Existing local status treatment retained; the inaccessible registry was not represented as an upstream component. |
 
-The local component uses a single decorative opacity/scale animation. `prefers-reduced-motion: reduce` disables that animation. Data values themselves never animate, which keeps prices and provenance stable and readable.
+The status component uses a single decorative opacity/scale animation. `prefers-reduced-motion: reduce` disables it. Data values never animate, which keeps prices and provenance stable and readable.
