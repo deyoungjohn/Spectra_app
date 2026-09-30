@@ -11,7 +11,7 @@ bash scripts/setup.sh
 npm run dev
 ```
 
-Open `http://localhost:3000`. The default screen displays **illustrative demo data**, not market quotes. No wallet, payment, or trading execution is connected.
+Open `http://localhost:3000`; it redirects to the Market Intelligence workspace. The terminal uses separate routes for `/market`, `/flow`, and `/forge`. The default screens display **illustrative demo data**, not market quotes. No wallet, payment, or trading execution is connected.
 
 ```bash
 npm run verify
