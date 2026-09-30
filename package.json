@@ -6,9 +6,9 @@
     "node": ">=20.11 <25"
   },
   "scripts": {
-    "dev": "next dev --hostname 0.0.0.0",
+    "dev": "next dev --hostname 0.0.0.0 --port 3001",
     "build": "next build",
-    "start": "next start --hostname 0.0.0.0",
+    "start": "next start --hostname 0.0.0.0 --port 3001",
     "typecheck": "tsc --noEmit",
     "lint": "eslint .",
     "test": "node --import tsx --test tests/*.test.ts",
